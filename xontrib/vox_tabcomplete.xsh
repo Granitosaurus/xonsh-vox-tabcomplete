@@ -8,8 +8,8 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
     """
     if not line.startswith('vox'):
         return
-    if len(line.split()) > 1 and line.endswith(' '):
-        # i.e. "vox new " -> no complete
+    if (len(line.split()) > 1 and line.endswith(' ')) or len(line.split()) > 2:
+        # "vox new " -> no complete (note space)
         return
     to_list_when = ['vox activate', 'vox remove']
     if any(case == line.strip() for case in to_list_when):
@@ -18,11 +18,11 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
 
     all_commands = re.findall('vox (\w+)', $(vox --help))
     if prefix in all_commands:
-        # "vox new" -> suggest replacing new with other command
-        return (all_commands, len(prefix))
-    else:
+        # "vox new" -> suggest replacing new with other command (note no space)
+        return all_commands, len(prefix)
+    elif prefix:
         # "vox n" -> suggest "new"
-        return ([c for c in all_commands if prefix in c], len(prefix))
+        return [c for c in all_commands if prefix in c], len(prefix)
     return set(all_commands)
 
 #add to list of completers
