@@ -8,7 +8,7 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
     """
     if not line.startswith('vox'):
         return
-    to_list_when = ['vox activate', 'vox remove']
+    to_list_when = ['vox activate ', 'vox remove ']
     if any(c in line.strip() for c in to_list_when):
         environments = set($(vox list).splitlines()[1:])
         for case in to_list_when:
@@ -27,7 +27,7 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
         return all_commands, len(prefix)
     elif prefix:
         # "vox n" -> suggest "new"
-        return [c for c in all_commands if prefix in c], len(prefix)
+        return [c for c in all_commands if c.startswith(prefix)], len(prefix)
     return set(all_commands)
 
 #add to list of completers
