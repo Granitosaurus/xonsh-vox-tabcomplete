@@ -15,4 +15,7 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
         all_commands = re.findall('vox (\w+)', $(vox --help))
         return set(all_commands)
 
-completer add 'vox' vox_completer "start"
+#add to list of completers
+__xonsh_completers__['vox'] = vox_completer
+#bump to top of list (otherwise bash completion interferes)
+__xonsh_completers__.move_to_end('vox', last=False)
