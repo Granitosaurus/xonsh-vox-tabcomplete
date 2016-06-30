@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name="xonsh-vox-tabcomplete",
-    version="0.11",
+    version="0.2",
     license="MIT",
     url="https://github.com/Granitas/xonsh-vox-tabcomplete",
     description="vox tabcomplete support for the Xonsh shell",
