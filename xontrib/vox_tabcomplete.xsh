@@ -9,13 +9,8 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
     if not line.startswith('vox'):
         return
     to_list_when = ['vox activate ', 'vox remove ']
-    if any(c in line.strip() for c in to_list_when):
-        environments = set($(vox list).splitlines()[1:])
-        for case in to_list_when:
-            if case == line.strip():
-                return environments
-            if case in line.strip():
-                return environments
+    if any(c in line for c in to_list_when):
+        return set($(vox list).splitlines()[1:])
 
     if (len(line.split()) > 1 and line.endswith(' ')) or len(line.split()) > 2:
         # "vox new " -> no complete (note space)
