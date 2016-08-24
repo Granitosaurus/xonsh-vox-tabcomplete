@@ -1,8 +1,4 @@
-import os
-import re
-
-
-def vox_completer(prefix, line, begidx, endidx, ctx):
+def _vox_completer(prefix, line, begidx, endidx, ctx):
     """
     Completes xonsh's `vox` virtual environment manager
     """
@@ -18,6 +14,7 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
         # "vox new " -> no complete (note space)
         return
 
+    import re
     all_commands = re.findall('vox (\w+)', $(vox --help))
     if prefix in all_commands:
         # "vox new" -> suggest replacing new with other command (note no space)
@@ -28,6 +25,6 @@ def vox_completer(prefix, line, begidx, endidx, ctx):
     return set(all_commands)
 
 #add to list of completers
-__xonsh_completers__['vox'] = vox_completer
+__xonsh_completers__['vox'] = _vox_completer
 #bump to top of list (otherwise bash completion interferes)
 __xonsh_completers__.move_to_end('vox', last=False)
