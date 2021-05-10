@@ -14,10 +14,10 @@ def _vox_completer(prefix, line, begidx, endidx, ctx):
     if (len(line.split()) > 1 and line.endswith(' ')) or len(line.split()) > 2:
         # "vox new " -> complete flags if any
         command = line.strip().split()[-1]
-        flags = set(re.findall('(--\w+)', $(vox @(command) --help)))
+        flags = set(re.findall(r'(--\w+)', $(vox @(command) --help)))
         return flags, len(prefix)
 
-    all_commands = re.findall('\n    (\w+)', $(vox --help))
+    all_commands = re.findall(r'\n    (\w+)', $(vox --help))
     if prefix in all_commands:
         # "vox new" -> suggest replacing new with other command (note no space)
         return all_commands, len(prefix)
@@ -27,6 +27,4 @@ def _vox_completer(prefix, line, begidx, endidx, ctx):
     return set(all_commands)
 
 #add to list of completers
-__xonsh_completers__['vox'] = _vox_completer
-#bump to top of list (otherwise bash completion interferes)
-__xonsh_completers__.move_to_end('vox', last=False)
+completer add vox _vox_completer start
