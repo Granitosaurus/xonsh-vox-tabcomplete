@@ -2,6 +2,7 @@
 Tab completion for vox in xonsh
 
 <hr>
+
 [![PyPi version](https://img.shields.io/pypi/v/xonsh-vox-tabcomplete.svg?style=flat-square)](https://pypi.python.org/pypi/xonsh-vox-tabcomplete)
 [![PyPi license](https://img.shields.io/pypi/l/xonsh-vox-tabcomplete.svg?style=flat-square)](https://pypi.python.org/pypi/xonsh-vox-tabcomplete)
 [![PyPi license](https://img.shields.io/pypi/pyversions/xonsh-vox-tabcomplete.svg?style=flat-square)](https://pypi.python.org/pypi/xonsh-vox-tabcomplete)  
