@@ -1,3 +1,6 @@
+import re
+
+
 def _vox_completer(prefix, line, begidx, endidx, ctx):
     """
     Completes xonsh's `vox` virtual environment manager
@@ -10,7 +13,6 @@ def _vox_completer(prefix, line, begidx, endidx, ctx):
         env_prefix = line.split(" ")[-1]
         return set( env for env in all_envs if env.startswith(env_prefix) )
 
-    import re
     if (len(line.split()) > 1 and line.endswith(' ')) or len(line.split()) > 2:
         # "vox new " -> complete flags if any
         command = line.strip().split()[-1]
@@ -28,3 +30,4 @@ def _vox_completer(prefix, line, begidx, endidx, ctx):
 
 #add to list of completers
 completer add vox _vox_completer start
+__all__ = []
